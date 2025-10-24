@@ -1,32 +1,67 @@
 package com.eve.eng1;
 
-import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
+
+import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.GdxRuntimeException;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
-public class Main extends ApplicationAdapter {
-    private SpriteBatch batch;
-    private Texture image;
+public class Main extends Game {
+    public static final float WORLD_WIDTH = 16f;
+    public static final float WORLD_HEIGHT = 9f;
+    private Batch batch;
+    private OrthographicCamera camera;
+
+    // The specific part of the map that the player sees
+    private Viewport viewport;
+
+
+    private final Map<Class<? extends Screen>, Screen> screenCache = new HashMap<>();
+
 
     @Override
     public void create() {
-        batch = new SpriteBatch();
-        image = new Texture("libgdx.png");
+        this.batch = new SpriteBatch();
+        this.camera = new OrthographicCamera();
+        this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+
+        addScreen(new GameScreen(this));
+        setScreen(GameScreen.class);
     }
 
     @Override
-    public void render() {
-        ScreenUtils.clear(0.15f, 0.15f, 0.2f, 1f);
-        batch.begin();
-        batch.draw(image, 140, 210);
-        batch.end();
+    public void resize(int width, int height) {
+        viewport.update(width, height, true);
+        super.resize(width, height);
+    }
+
+
+    public void addScreen(Screen screen) {
+        screenCache.put(screen.getClass(), screen);
+    }
+
+    public void setScreen(Class<? extends Screen> screenClass) {
+        Screen screen = screenCache.get(screenClass);
+
+        if(screen == null) {
+            throw new GdxRuntimeException("Screen class " + screenClass + " not found!");
+        }
+        super.setScreen(screen);
     }
 
     @Override
     public void dispose() {
-        batch.dispose();
-        image.dispose();
+        screenCache.values().forEach(Screen::dispose);
+        screenCache.clear();
+
+        this.batch.dispose();
     }
 }
