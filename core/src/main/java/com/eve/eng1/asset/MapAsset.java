@@ -2,16 +2,20 @@ package com.eve.eng1.asset;
 
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 
 public enum MapAsset implements Asset<TiledMap> {
     BEDROOM("bedroom.tmx");
 
     private final AssetDescriptor<TiledMap> descriptor;
 
-    public MapAsset(String mapName) {
+    MapAsset(String mapName) {
+        TmxMapLoader.Parameters parameters = new TmxMapLoader.Parameters();
+        parameters.projectFilePath = "maps/3NG-Game.tiled-project";
         this.descriptor = new AssetDescriptor<>("maps/" + mapName, TiledMap.class);
+        
     }
-    public MapAsset(AssetDescriptor<TiledMap> getescriptor) {
-        this.descriptor = descriptor;
+    public AssetDescriptor<TiledMap> getDescriptor() {
+        return this.descriptor;
     }
 }

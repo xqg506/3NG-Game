@@ -3,12 +3,14 @@ package com.eve.eng1;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.eve.eng1.asset.AssetService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -17,8 +19,11 @@ import java.util.Map;
 public class Main extends Game {
     public static final float WORLD_WIDTH = 16f;
     public static final float WORLD_HEIGHT = 9f;
+    public static final float UNIT_SCALE = 1f / 16f;
+
     private Batch batch;
     private OrthographicCamera camera;
+    private AssetService assetService;
 
     // The specific part of the map that the player sees
     private Viewport viewport;
@@ -32,6 +37,7 @@ public class Main extends Game {
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
+        this.assetService = new AssetService(new InternalFileHandleResolver());
 
         addScreen(new GameScreen(this));
         setScreen(GameScreen.class);
@@ -63,5 +69,23 @@ public class Main extends Game {
         screenCache.clear();
 
         this.batch.dispose();
+        this.assetService.debugDiagnostics();
+        this.assetService.dispose();
+    }
+
+    public Batch getBatch() {
+        return batch;
+    }
+
+    public AssetService getAssetService() {
+        return assetService;
+    }
+
+    public Viewport getViewport() {
+        return viewport;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
     }
 }
