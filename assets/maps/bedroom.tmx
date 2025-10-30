@@ -2,10 +2,9 @@
 <map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="1">
  <tileset firstgid="1" source="decorations.tsx"/>
  <tileset firstgid="145" source="sprite_03.tsx"/>
- <tileset firstgid="149" source="sprite_02.tsx"/>
- <tileset firstgid="153" source="beds.tsx"/>
- <tileset firstgid="377" source="wardrobes.tsx"/>
- <tileset firstgid="860" source="Interiors_free_16x16.tsx"/>
+ <tileset firstgid="149" source="beds.tsx"/>
+ <tileset firstgid="373" source="wardrobes.tsx"/>
+ <tileset firstgid="856" source="Interiors_free_16x16.tsx"/>
  <layer id="1" name="ground" width="15" height="14">
   <data encoding="base64" compression="zlib">
    eJwzYWBgMBnFROGJQDyJTHoyEE8hkx61d/DbCwA5jVxr
@@ -13,7 +12,7 @@
  </layer>
  <layer id="2" name="background" width="15" height="14">
   <data encoding="base64" compression="zlib">
-   eJzdz0sOAUEUheFbSW8BY3qR7IAlmGGm0TMkiMfMa4ZiCR5r8Po7uR0SSUkqRm7y5VZ1zkmqRX4/GWSRc2SaRiRCC23z+p5HAaGjOyY/wRQz4wjq1MjU0cAGW+xgtVtN3sDuINZ7Ol3OPfRxxAlnXDQTswfsIUZ6T2fJeYU1rrjhjsdbZo5Fkv3+Gx9jscfBo/vPUwxESoFft0yv4tF9AhWnJVE=
+   eJzdz0sOAUEUheFbSW8BY3qJ7IAlmGGm0TMkiMfMa4ZiCR5r8Jj4O7kdEklJKkZu8uVWdc5JqkV+PxlkkXNkmkYkQgtt8/qeRwGhozsmP8EUM+MI6tTI1NHABlvsYLVbTd7A7iDWezpdzj30ccQJZ1w0E7MH7CFGek9nyXmFNa644Y7HW2aORZL9/hsfY7HHwaP7z1MMREqBX7dMr+LRfQKNWSSN
   </data>
  </layer>
  <layer id="3" name="foreground" width="15" height="14">
