@@ -17,7 +17,7 @@ public class GameScreen extends ScreenAdapter {
     private final AssetService assetService;
     private final Viewport viewport;
     private final OrthographicCamera camera;
-    
+
 
     private final OrthogonalTiledMapRenderer mapRenderer;
 
@@ -39,9 +39,9 @@ public class GameScreen extends ScreenAdapter {
     @Override
     public void render(float delta) {
         /*
-        Good practice to apply the viewport before any rendering calls are done, so that the 
+        Good practice to apply the viewport before any rendering calls are done, so that the
         rendering process in the background knows the dimensions and where to put everything.
-        */ 
+        */
         this.viewport.apply();
         this.batch.setColor(Color.WHITE);
         this.mapRenderer.setView(this.camera);
