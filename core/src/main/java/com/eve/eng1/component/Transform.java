@@ -18,7 +18,7 @@ public class Transform implements Component, Comparable<Transform> {
     // Entity rotation
     private float rotationDeg;
 
-    Transform(Vector2 position, int z, Vector2 size, Vector2 scaling, float rotationDeg) {
+    public Transform(Vector2 position, int z, Vector2 size, Vector2 scaling, float rotationDeg) {
         this.position = position;
         this.z = z;
         this.size = size;

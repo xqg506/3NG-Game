@@ -31,18 +31,22 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
     e.g. a player would stand in front of a tree.
      */
 
-    public RenderSystem(Batch batch, Viewport viewport) {
+    public RenderSystem(Batch batch, Viewport viewport, OrthographicCamera camera) {
         super(
             // A family is a combination of components.
             Family.all(Transform.class, Graphic.class).get(), Comparator.comparing(Transform.MAPPER::get));
         this.batch = batch;
         this.viewport = viewport;
-        this.camera = (OrthographicCamera) viewport.getCamera();
+        this.camera = camera;
         this.mapRenderer = new OrthogonalTiledMapRenderer(null, Main.UNIT_SCALE, this.batch);
     }
 
     @Override
     public void update(float deltaTime) {
+        /*
+        Good practice to apply the viewport before any rendering calls are done, so that the
+        rendering process in the background knows the dimensions and where to put everything.
+        */
         this.viewport.apply();
         this.batch.setColor(Color.WHITE);
         this.mapRenderer.setView(this.camera);
@@ -50,7 +54,9 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
 
         // We do force sort because it needs to update dynamically and calculate the entities position
         forceSort();
+        batch.begin();
         super.update(deltaTime);
+        batch.end();
     }
 
 
