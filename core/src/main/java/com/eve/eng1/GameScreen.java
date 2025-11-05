@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
+import com.eve.eng1.system.RenderSystem;
 
 public class GameScreen extends ScreenAdapter {
     private final Main game;
@@ -22,7 +23,7 @@ public class GameScreen extends ScreenAdapter {
     private final OrthographicCamera camera;
 
 
-    private final OrthogonalTiledMapRenderer mapRenderer;
+
 
     private final Engine engine;
 
@@ -33,17 +34,17 @@ public class GameScreen extends ScreenAdapter {
         this.viewport = game.getViewport();
         this.camera = game.getCamera();
         this.batch = game.getBatch();
-        this.mapRenderer = new OrthogonalTiledMapRenderer(null, Main.UNIT_SCALE, this.batch);
+
 
 
         this.engine = new Engine();
-        this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.assetService));
+        this.engine.addSystem(new RenderSystem(this.batch, this.viewport));
     }
 
     @Override
     public void show() {
         this.assetService.load(MapAsset.BEDROOM);
-        this.mapRenderer.setMap(this.assetService.get(MapAsset.BEDROOM));
+        this.engine.getSystem(RenderSystem.class).setMap(this.assetService.get(MapAsset.BEDROOM));
     }
 
     @Override
@@ -60,10 +61,7 @@ public class GameScreen extends ScreenAdapter {
         Good practice to apply the viewport before any rendering calls are done, so that the
         rendering process in the background knows the dimensions and where to put everything.
         */
-        this.viewport.apply();
-        this.batch.setColor(Color.WHITE);
-        this.mapRenderer.setView(this.camera);
-        this.mapRenderer.render();
+
     }
 
     @Override
@@ -73,7 +71,6 @@ public class GameScreen extends ScreenAdapter {
                 disposableSystem.dispose();
             }
         }
-        this.mapRenderer.dispose();
-        super.dispose();
+
     }
 }
