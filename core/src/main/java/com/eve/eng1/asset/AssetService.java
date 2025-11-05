@@ -9,7 +9,7 @@ import com.badlogic.gdx.utils.Disposable;
 
 
 public class AssetService implements Disposable {
-    private final AssetManager assetManager;    
+    private final AssetManager assetManager;
 
     public AssetService(FileHandleResolver fileHandleResolver){
         this.assetManager = new AssetManager(fileHandleResolver);
@@ -19,7 +19,7 @@ public class AssetService implements Disposable {
     public <T> T load(Asset<T> asset) {
         this.assetManager.load(asset.getDescriptor());
         this.assetManager.finishLoading();
-        return this.assetManager.get(asset.getDescriptor()); 
+        return this.assetManager.get(asset.getDescriptor());
     }
 
     /**
@@ -31,6 +31,10 @@ public class AssetService implements Disposable {
 
     public <T> T get(Asset<T> asset) {
         return this.assetManager.get(asset.getDescriptor());
+    }
+
+    public <T> void unload(Asset<T> asset) {
+        this.assetManager.unload(asset.getDescriptor().fileName);
     }
 
     public boolean update() {
@@ -45,4 +49,6 @@ public class AssetService implements Disposable {
     public void dispose() {
         this.assetManager.dispose();
     }
+
+
 }
