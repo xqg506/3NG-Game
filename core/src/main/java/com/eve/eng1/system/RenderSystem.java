@@ -54,7 +54,9 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
 
         // We do force sort because it needs to update dynamically and calculate the entities position
         forceSort();
+        batch.begin();
         super.update(deltaTime);
+        batch.end();
     }
 
 

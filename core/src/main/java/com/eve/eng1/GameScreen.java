@@ -16,6 +16,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
 import com.eve.eng1.system.RenderSystem;
+import com.eve.eng1.tiled.TiledAshleyConfigurator;
 import com.eve.eng1.tiled.TiledService;
 
 public class GameScreen extends ScreenAdapter {
@@ -28,6 +29,7 @@ public class GameScreen extends ScreenAdapter {
     private final Engine engine;
 
     private final TiledService tiledService;
+    private final TiledAshleyConfigurator tiledAshleyConfigurator;
 
     public GameScreen(Main game) {
         this.game = game;
@@ -37,8 +39,11 @@ public class GameScreen extends ScreenAdapter {
         this.batch = game.getBatch();
         this.tiledService = new TiledService(this.assetService);
 
+
         this.engine = new Engine();
         this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
+
+        this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, this.assetService);
     }
 
     @Override
@@ -46,6 +51,7 @@ public class GameScreen extends ScreenAdapter {
 
         Consumer<TiledMap> renderConsumer = this.engine.getSystem(RenderSystem.class)::setMap;
         this.tiledService.setMapChangeConsumer(renderConsumer);
+        this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
 
         TiledMap tiledMap = this.tiledService.loadMap(MapAsset.BEDROOM);
         this.tiledService.setMap(tiledMap);
