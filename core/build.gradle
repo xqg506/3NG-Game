@@ -9,10 +9,20 @@ dependencies {
   }
 
   implementation "com.badlogicgames.ashley:ashley:1.7.3"
+<<<<<<< HEAD
+=======
 }
 
-
 repositories {
-    maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+  maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+  maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+}
+allprojects {
+  sourceCompatibility = 1.17
+  targetCompatibility = 1.17
+}
+java {
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
+>>>>>>> fd9041c56fb41042b2e2c7b4d619dd99c8806440
 }
