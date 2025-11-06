@@ -9,7 +9,9 @@ import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Vector2;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
+import com.eve.eng1.component.Controller;
 import com.eve.eng1.component.Graphic;
+import com.eve.eng1.component.Move;
 import com.eve.eng1.component.Transform;
 
 public class TiledAshleyConfigurator {
@@ -39,8 +41,24 @@ public class TiledAshleyConfigurator {
             tileMapObject.getScaleX(), tileMapObject.getScaleY(),
             entity
         );
+        addEntityController(tileMapObject, entity);
+        addEntityMove(tile, entity);
 
         this.engine.addEntity(entity);
+    }
+
+    private void addEntityMove(TiledMapTile tile, Entity entity) {
+        float speed = tile.getProperties().get("speed", 0f, Float.class);
+        if (speed == 0f) return;
+
+        entity.add(new Move(speed));
+    }
+
+    private void addEntityController(TiledMapTileMapObject tileMapObject, Entity entity) {
+        boolean controller = tileMapObject.getProperties().get("controller", false, Boolean.class);
+        if (!controller) return;
+
+        entity.add(new Controller());
     }
 
     public void addEntityTransform(

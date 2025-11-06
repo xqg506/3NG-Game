@@ -1,7 +1,14 @@
 package com.eve.eng1;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
+import com.badlogic.ashley.core.Engine;
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -12,8 +19,6 @@ import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
 
-import java.util.HashMap;
-import java.util.Map;
 
 /** {@link com.badlogic.gdx.ApplicationListener} implementation shared by all platforms. */
 public class Main extends Game {
@@ -24,13 +29,13 @@ public class Main extends Game {
     private Batch batch;
     private OrthographicCamera camera;
     private AssetService assetService;
+    private Engine engine;
+    private InputMultiplexer inputMultiplexer;
 
     // The specific part of the map that the player sees
     private Viewport viewport;
 
-
     private final Map<Class<? extends Screen>, Screen> screenCache = new HashMap<>();
-
 
     @Override
     public void create() {
@@ -38,6 +43,9 @@ public class Main extends Game {
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         this.assetService = new AssetService(new InternalFileHandleResolver());
+        this.engine = new Engine();
+        this.inputMultiplexer = new InputMultiplexer();
+        Gdx.input.setInputProcessor(inputMultiplexer);
 
         addScreen(new GameScreen(this));
         setScreen(GameScreen.class);
@@ -88,4 +96,23 @@ public class Main extends Game {
     public OrthographicCamera getCamera() {
         return camera;
     }
+
+    //Game updates 
+    public void render(float delta) {
+        delta = Math.min(delta, 1 / 30f);
+        this.engine.update(delta);
+        }
+
+    public void setInputProcessors(InputProcessor... processors) {
+        //Resetting anything currently in + setting up inputs
+        inputMultiplexer.clear();
+
+        if (processors == null) return;
+
+        for (InputProcessor processor : processors) {
+            inputMultiplexer.addProcessor(processor);
+        }
+
+    }
+    
 }
