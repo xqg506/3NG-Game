@@ -43,7 +43,7 @@
     "openFiles": [
     ],
     "project": "3NG-Game.tiled-project",
-    "property.type": "float",
+    "property.type": "string",
     "recentFiles": [
         "sprite_02.tsx",
         "sprite_01.tsx",
