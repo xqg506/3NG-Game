@@ -30,6 +30,9 @@
         },
         "sprite_03.tsx": {
             "dynamicWrapping": false
+        },
+        "wardrobes.tsx": {
+            "dynamicWrapping": false
         }
     },
     "last.externalTilesetPath": "/home/charles/Uni/3NG-Game/assets/maps/Flooring Tilesets/Wooden Planks",
