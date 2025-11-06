@@ -9,8 +9,6 @@ dependencies {
   }
 
   implementation "com.badlogicgames.ashley:ashley:1.7.3"
-<<<<<<< HEAD
-=======
 }
 
 repositories {
@@ -24,5 +22,4 @@ allprojects {
 java {
   sourceCompatibility = JavaVersion.VERSION_17
   targetCompatibility = JavaVersion.VERSION_17
->>>>>>> fd9041c56fb41042b2e2c7b4d619dd99c8806440
 }
