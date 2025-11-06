@@ -17,10 +17,7 @@ import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
 import com.eve.eng1.input.GameControllerState;
 import com.eve.eng1.input.KeyboardController;
-import com.eve.eng1.system.ControllerSystem;
-import com.eve.eng1.system.MoveSystem;
-import com.eve.eng1.system.PhysicSystem;
-import com.eve.eng1.system.RenderSystem;
+import com.eve.eng1.system.*;
 import com.eve.eng1.tiled.TiledAshleyConfigurator;
 import com.eve.eng1.tiled.TiledService;
 
@@ -57,13 +54,12 @@ public class GameScreen extends ScreenAdapter {
         this.engine.addSystem(new MoveSystem());
         this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
         this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
+        this.engine.addSystem(new PhysicDebugRenderSystem(physicWorld, game.getCamera()));
 
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, this.assetService);
 
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
-
-
-
+        
     }
 
     @Override
