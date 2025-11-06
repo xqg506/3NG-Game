@@ -8,6 +8,8 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.Main;
@@ -35,6 +37,9 @@ public class GameScreen extends ScreenAdapter {
     private final TiledAshleyConfigurator tiledAshleyConfigurator;
     private final KeyboardController keyboardController;
 
+    private final World physicWorld;
+
+
     public GameScreen(Main game) {
         this.game = game;
         this.assetService = game.getAssetService();
@@ -52,6 +57,10 @@ public class GameScreen extends ScreenAdapter {
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, this.assetService);
 
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
+
+        this.physicWorld = new World(Vector2.Zero, true);
+        this.physicWorld.setAutoClearForces(false);
+
     }
 
     @Override
