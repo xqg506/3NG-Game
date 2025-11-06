@@ -19,6 +19,7 @@ import com.eve.eng1.input.GameControllerState;
 import com.eve.eng1.input.KeyboardController;
 import com.eve.eng1.system.ControllerSystem;
 import com.eve.eng1.system.MoveSystem;
+import com.eve.eng1.system.PhysicSystem;
 import com.eve.eng1.system.RenderSystem;
 import com.eve.eng1.tiled.TiledAshleyConfigurator;
 import com.eve.eng1.tiled.TiledService;
@@ -48,18 +49,20 @@ public class GameScreen extends ScreenAdapter {
         this.batch = game.getBatch();
         this.tiledService = new TiledService(this.assetService);
 
+        this.physicWorld = new World(Vector2.Zero, true);
+        this.physicWorld.setAutoClearForces(false);
 
         this.engine = new Engine();
         this.engine.addSystem(new ControllerSystem());
         this.engine.addSystem(new MoveSystem());
         this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
+        this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
 
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, this.assetService);
 
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
 
-        this.physicWorld = new World(Vector2.Zero, true);
-        this.physicWorld.setAutoClearForces(false);
+
 
     }
 
@@ -97,5 +100,6 @@ public class GameScreen extends ScreenAdapter {
                 disposableSystem.dispose();
             }
         }
+        this.physicWorld.dispose();
     }
 }
