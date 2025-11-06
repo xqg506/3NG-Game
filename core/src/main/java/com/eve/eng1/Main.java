@@ -11,6 +11,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
+import com.eve.eng1.screen.GameScreen;
+import com.eve.eng1.screen.LoadingScreen;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -39,8 +41,8 @@ public class Main extends Game {
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         this.assetService = new AssetService(new InternalFileHandleResolver());
 
-        addScreen(new GameScreen(this));
-        setScreen(GameScreen.class);
+        addScreen(new LoadingScreen(this, assetService));
+        setScreen(LoadingScreen.class);
     }
 
     @Override
@@ -52,6 +54,10 @@ public class Main extends Game {
 
     public void addScreen(Screen screen) {
         screenCache.put(screen.getClass(), screen);
+    }
+
+    public void removeScreen(Screen screen) {
+        screenCache.remove(screen.getClass());
     }
 
     public void setScreen(Class<? extends Screen> screenClass) {

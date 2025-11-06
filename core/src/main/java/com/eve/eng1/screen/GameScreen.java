@@ -1,18 +1,16 @@
-package com.eve.eng1;
+package com.eve.eng1.screen;
 
-import java.util.Map;
 import java.util.function.Consumer;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
-import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
+import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
 import com.eve.eng1.system.RenderSystem;
