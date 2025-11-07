@@ -10,5 +10,58 @@
     "properties": [
     ],
     "propertyTypes": [
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 1,
+            "members": [
+                {
+                    "name": "atlasAsset",
+                    "type": "string",
+                    "value": ""
+                }
+            ],
+            "name": "Prop",
+            "type": "class",
+            "useAs": [
+                "property",
+                "tile",
+                "project"
+            ]
+        },
+        {
+            "color": "#ffa0a0a4",
+            "drawFill": true,
+            "id": 2,
+            "members": [
+                {
+                    "name": "animation",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "animationSpeed",
+                    "type": "float",
+                    "value": 0
+                },
+                {
+                    "name": "atlasAsset",
+                    "type": "string",
+                    "value": ""
+                },
+                {
+                    "name": "speed",
+                    "type": "float",
+                    "value": 0
+                }
+            ],
+            "name": "GameObject",
+            "type": "class",
+            "useAs": [
+                "property",
+                "tile",
+                "project"
+            ]
+        }
     ]
 }

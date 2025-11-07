@@ -45,7 +45,7 @@ public class GameScreen extends ScreenAdapter {
 
 
         this.engine.addSystem(new ControllerSystem());
-        this.engine.addSystem(new MoveSystem());
+        this.engine.addSystem(new PhysicMoveSystem());
         //Fsm system goes here
         //Facing system goes here
         this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
