@@ -3,17 +3,37 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "objects.tsx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/home/charles/Uni/3NG-Game/assets/objects/objects.tsx": {
+            "scaleInDock": 1
+        },
         "Interiors_free_16x16.tsx": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 1
+        },
+        "bedroom.tmx": {
+            "scale": 2.6379464285714285,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 119.97969199526148,
+                "y": 157.88796750719246
+            }
+        },
+        "beds.tsx": {
+            "scaleInDock": 1
+        },
+        "decorations.tsx": {
+            "scaleInDock": 1
         },
         "objects.tsx": {
-            "dynamicWrapping": true
+            "dynamicWrapping": true,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "sprite_00.tsx": {
             "scaleInDock": 1,
@@ -29,10 +49,11 @@
             "scaleInEditor": 1
         },
         "sprite_03.tsx": {
-            "dynamicWrapping": false
+            "dynamicWrapping": false,
+            "scaleInDock": 1
         },
         "wardrobes.tsx": {
-            "dynamicWrapping": false
+            "scaleInDock": 1
         }
     },
     "last.externalTilesetPath": "/home/charles/Uni/3NG-Game/assets/maps/Flooring Tilesets/Wooden Planks",
@@ -44,10 +65,14 @@
     "map.tileWidth": 16,
     "map.width": 15,
     "openFiles": [
+        "bedroom.tmx",
+        "objects.tsx"
     ],
     "project": "3NG-Game.tiled-project",
     "property.type": "float",
     "recentFiles": [
+        "bedroom.tmx",
+        "objects.tsx",
         "sprite_02.tsx",
         "sprite_01.tsx",
         "sprite_00.tsx"
