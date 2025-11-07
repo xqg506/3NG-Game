@@ -52,7 +52,6 @@ public class TiledAshleyConfigurator {
 
     private void addEntityMove(TiledMapTile tile, Entity entity) {
         float speed = tile.getProperties().get("speed", 0f, Float.class);
-        if (speed == 0f) return;
 
         entity.add(new Move(speed));
     }

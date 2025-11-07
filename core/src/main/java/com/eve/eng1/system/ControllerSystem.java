@@ -32,21 +32,28 @@ public class ControllerSystem extends IteratingSystem {
 
         //Values are inverted to make them become zero when pressed and unpressed
         for (Commands command : controller.getReleasedCommands()) {
+          
           switch (command) { 
             case UP -> moveEntity(entity, 0f, -1f);
             case DOWN -> moveEntity(entity, 0f, 1f);
             case LEFT -> moveEntity(entity, 1f, 0f);
             case RIGHT -> moveEntity(entity, -1f, 0f);
+            
           }
         }
         controller.getReleasedCommands().clear();
+
+        
     }
 
     private void moveEntity(Entity entity, float dX, float dY) {
         Move move = Move.MAPPER.get(entity);
-        if (move == null) return;
+        if (move == null) {
+          return;
+        }
 
         move.getDirection().x += dX;
         move.getDirection().y += dY;
+        
     }
 }

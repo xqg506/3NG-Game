@@ -45,13 +45,13 @@ public class GameScreen extends ScreenAdapter {
 
 
         this.engine = new Engine();
-        this.engine.addSystem(new ControllerSystem());
         this.engine.addSystem(new MoveSystem());
-        this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
 
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, this.assetService);
 
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
+        this.engine.addSystem(new ControllerSystem());
+        this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
     }
 
     @Override

@@ -20,6 +20,7 @@ public class MoveSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         Move move = Move.MAPPER.get(entity);
         if (move.isRooted() || move.getDirection().isZero()) {
+
             return;
         }
 
@@ -27,7 +28,7 @@ public class MoveSystem extends IteratingSystem {
         Vector2 position = transform.getPosition();
         position.set(
             position.x + move.getMaxSpeed() * move.getDirection().x * deltaTime, //multiplied by deltatime ensures higherfps != faster movement 
-            position.y + move.getMaxSpeed() * move.getDirection().y *deltaTime
+            position.y + move.getMaxSpeed() * move.getDirection().y * deltaTime
         );
     }
 }
