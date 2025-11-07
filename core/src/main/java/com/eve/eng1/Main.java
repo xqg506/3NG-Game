@@ -18,7 +18,9 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
-import com.eve.eng1.screen.GameScreen;
+import com.eve.eng1.input.ControllerState;
+import com.eve.eng1.input.GameControllerState;
+import com.eve.eng1.input.KeyboardController;
 import com.eve.eng1.screen.LoadingScreen;
 
 
@@ -41,12 +43,17 @@ public class Main extends Game {
 
     @Override
     public void create() {
+        inputMultiplexer = new InputMultiplexer();
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         this.assetService = new AssetService(new InternalFileHandleResolver());
         this.engine = new Engine();
-        this.inputMultiplexer = new InputMultiplexer();
+        KeyboardController keyboardController = new KeyboardController(
+    (Class<? extends ControllerState>) GameControllerState.class,
+    engine);
+
+        inputMultiplexer.addProcessor(keyboardController);
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         addScreen(new LoadingScreen(this, assetService));
@@ -111,6 +118,9 @@ public class Main extends Game {
 
     public void setInputProcessors(InputProcessor... processors) {
         //Resetting anything currently in + setting up inputs
+        if (inputMultiplexer == null) {
+            return;
+        }
         inputMultiplexer.clear();
 
         if (processors == null) return;

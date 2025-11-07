@@ -17,11 +17,11 @@ public class ControllerSystem extends IteratingSystem {
     protected void processEntity(Entity entity, float deltaTime) {
         Controller controller = Controller.MAPPER.get(entity);
         if(controller.getPressedCommands().isEmpty() && controller.getReleasedCommands().isEmpty()){
-            return;
+            return; //Nothing to process
         }
 
-        for (Commands pressedCommand : controller.getPressedCommands()) {
-          switch (pressedCommand) { 
+        for (Commands command : controller.getPressedCommands()) {
+          switch (command) { 
             case UP -> moveEntity(entity, 0f, 1f);
             case DOWN -> moveEntity(entity, 0f, -1f);
             case LEFT -> moveEntity(entity, -1f, 0f);
@@ -31,8 +31,8 @@ public class ControllerSystem extends IteratingSystem {
         controller.getPressedCommands().clear();
 
         //Values are inverted to make them become zero when pressed and unpressed
-        for (Commands pressedCommand : controller.getPressedCommands()) {
-          switch (pressedCommand) { 
+        for (Commands command : controller.getReleasedCommands()) {
+          switch (command) { 
             case UP -> moveEntity(entity, 0f, -1f);
             case DOWN -> moveEntity(entity, 0f, 1f);
             case LEFT -> moveEntity(entity, 1f, 0f);
