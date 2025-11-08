@@ -6,9 +6,9 @@ import com.badlogic.ashley.core.EntityListener;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.IteratingSystem;
 import com.badlogic.gdx.math.MathUtils;
-import com.eve.eng1.component.Transform;
 import com.badlogic.gdx.physics.box2d.World;
 import com.eve.eng1.component.Physic;
+import com.eve.eng1.component.Transform;
 
 public class PhysicSystem extends IteratingSystem implements EntityListener {
     private final World world;

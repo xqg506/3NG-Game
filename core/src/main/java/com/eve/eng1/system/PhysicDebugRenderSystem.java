@@ -20,7 +20,8 @@ public class PhysicDebugRenderSystem extends EntitySystem implements Disposable 
 
     @Override
     public void update(float deltaTime) {
-        this.box2DDebugRenderer.render(physicWorld, camera.combined);
+        //This line enabled gives the green line around collisionable objects back
+        //this.box2DDebugRenderer.render(physicWorld, camera.combined);
     }
     @Override
     public void dispose() {}

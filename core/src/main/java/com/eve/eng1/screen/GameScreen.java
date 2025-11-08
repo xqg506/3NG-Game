@@ -5,19 +5,19 @@ import java.util.function.Consumer;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
-import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.Main;
-import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
 import com.eve.eng1.input.GameControllerState;
 import com.eve.eng1.input.KeyboardController;
-import com.eve.eng1.system.*;
+import com.eve.eng1.system.ControllerSystem;
+import com.eve.eng1.system.PhysicDebugRenderSystem;
+import com.eve.eng1.system.PhysicMoveSystem;
+import com.eve.eng1.system.PhysicSystem;
+import com.eve.eng1.system.RenderSystem;
 import com.eve.eng1.tiled.TiledAshleyConfigurator;
 import com.eve.eng1.tiled.TiledService;
 
@@ -36,9 +36,6 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(Main game) {
         this.game = game;
-
-
-
 
         this.physicWorld = new World(Vector2.Zero, true);
         this.tiledService = new TiledService(game.getAssetService());
