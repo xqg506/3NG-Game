@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Move implements Component {
     public static final ComponentMapper<Move> MAPPER = ComponentMapper.getFor(Move.class);
 
-    private float maxSpeed;
+    private final float maxSpeed;
     private final Vector2 direction;
     private boolean isRooted;
 

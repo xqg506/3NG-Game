@@ -2,6 +2,7 @@ package com.eve.eng1.tiled;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -110,13 +111,13 @@ public class TiledAshleyConfigurator {
 
     private void addEntityMove(TiledMapTile tile, Entity entity) {
         float speed = tile.getProperties().get("speed", 0f, Float.class);
-        if (speed == 0f) return;
-
+        if(speed == 0) return;
         entity.add(new Move(speed));
     }
 
     private void addEntityController(TiledMapTileMapObject tileMapObject, Entity entity) {
         boolean controller = tileMapObject.getProperties().get("controller", false, Boolean.class);
+        System.out.println(controller);
         if (!controller) return;
 
         entity.add(new Controller());
