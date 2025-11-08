@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="5">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="8">
  <tileset firstgid="1" source="decorations.tsx"/>
  <tileset firstgid="145" source="sprite_03.tsx"/>
  <tileset firstgid="149" source="beds.tsx"/>
@@ -17,13 +17,12 @@
   </data>
  </layer>
  <objectgroup id="4" name="objects">
-  <object id="1" gid="2280" x="18.0606" y="230.337" width="32" height="32">
+  <object id="6" gid="2284" x="20.3919" y="226.391" width="32" height="32">
    <properties>
-    <property name="move" type="bool" value="true"/>
-    <property name="speed" type="float" value="3"/>
+    <property name="controller" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="4" gid="2281" x="87.499" y="146.409" width="32" height="32"/>
+  <object id="7" gid="2285" x="86.3523" y="148.679" width="32" height="32"/>
  </objectgroup>
  <layer id="3" name="foreground" width="15" height="14">
   <data encoding="base64" compression="zlib">

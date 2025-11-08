@@ -24,7 +24,7 @@ public class KeyboardController extends InputAdapter {
         this.activeState = null;
         this.commandState = new boolean[Commands.values().length];
 
-        //this.stateCache.put(IdleControllerState.class, new IdleControllerState());
+        this.stateCache.put(IdleControllerState.class, new IdleControllerState());
         this.stateCache.put(GameControllerState.class, new GameControllerState(engine));
         setActiveState(initialState);
     }
@@ -35,13 +35,14 @@ public class KeyboardController extends InputAdapter {
         if (controllerState == null) {
             throw new GdxRuntimeException("No state with" + stateClass + "class found in the state cache");
         }
-
+        
         for (Commands command : Commands.values()) {
             if (this.activeState!=null && this.commandState[command.ordinal()]){
                 this.activeState.keyUp(command);
             }
             this.commandState[command.ordinal()] = false;
         }
+        
         this.activeState = controllerState;
     }
 
@@ -60,10 +61,11 @@ public class KeyboardController extends InputAdapter {
     public boolean keyUp(int keycode) {
         Commands command = KEY_MAPPING.get(keycode);
         if (command == null) return false;
-
+        
         if (!this.commandState[command.ordinal()]) return false;
 
         this.commandState[command.ordinal()] = false;
+        
         this.activeState.keyUp(command);
         return true;
 

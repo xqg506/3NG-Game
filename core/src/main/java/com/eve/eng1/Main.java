@@ -43,7 +43,10 @@ public class Main extends Game {
 
     @Override
     public void create() {
-        inputMultiplexer = new InputMultiplexer();
+        this.inputMultiplexer = new InputMultiplexer();
+                
+        Gdx.input.setInputProcessor(inputMultiplexer);
+
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
@@ -53,8 +56,7 @@ public class Main extends Game {
     (Class<? extends ControllerState>) GameControllerState.class,
     engine);
 
-        inputMultiplexer.addProcessor(keyboardController);
-        Gdx.input.setInputProcessor(inputMultiplexer);
+    inputMultiplexer.addProcessor(keyboardController);
 
         addScreen(new LoadingScreen(this, assetService));
         setScreen(LoadingScreen.class);

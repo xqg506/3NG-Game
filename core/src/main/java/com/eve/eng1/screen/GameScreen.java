@@ -41,28 +41,28 @@ public class GameScreen extends ScreenAdapter {
         this.viewport = game.getViewport();
         this.camera = game.getCamera();
         this.batch = game.getBatch();
+
         this.tiledService = new TiledService(this.assetService);
-
-
         this.engine = new Engine();
-        this.engine.addSystem(new MoveSystem());
-
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, this.assetService);
-
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
+
+        // Systems
         this.engine.addSystem(new ControllerSystem());
+        this.engine.addSystem(new MoveSystem());
         this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
+  
     }
 
     @Override
     public void show() {
-
         game.setInputProcessors(keyboardController);
         keyboardController.setActiveState(GameControllerState.class);
-
+        
         Consumer<TiledMap> renderConsumer = this.engine.getSystem(RenderSystem.class)::setMap;
         this.tiledService.setMapChangeConsumer(renderConsumer);
         this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
+
 
         TiledMap tiledMap = this.tiledService.loadMap(MapAsset.BEDROOM);
         this.tiledService.setMap(tiledMap);
