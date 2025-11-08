@@ -25,30 +25,35 @@ import com.eve.eng1.tiled.TiledService;
 public class GameScreen extends ScreenAdapter {
     private final Main game;
 
-    private final Engine engine;
+
+
 
     private final TiledService tiledService;
+    private final Engine engine;
     private final TiledAshleyConfigurator tiledAshleyConfigurator;
-    private final KeyboardController keyboardController;
-
     private final World physicWorld;
-
+    private final KeyboardController keyboardController;
 
     public GameScreen(Main game) {
         this.game = game;
+
+
+
+
+        this.physicWorld = new World(Vector2.Zero, true);
         this.tiledService = new TiledService(game.getAssetService());
         this.engine = new Engine();
-        this.physicWorld = new World(Vector2.Zero, true);
         this.physicWorld.setAutoClearForces(false);
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, game.getAssetService(), this.physicWorld);
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
 
 
-        this.engine.addSystem(new ControllerSystem());
         this.engine.addSystem(new PhysicMoveSystem());
+        this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
+        this.engine.addSystem(new ControllerSystem());
         //Fsm system goes here
         //Facing system goes here
-        this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
+
         //Animation system goes here
         this.engine.addSystem(new RenderSystem(game.getBatch(), game.getViewport(), game.getCamera()));
         this.engine.addSystem(new PhysicDebugRenderSystem(physicWorld, game.getCamera()));
