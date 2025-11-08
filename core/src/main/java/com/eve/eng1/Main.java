@@ -11,6 +11,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
+import com.eve.eng1.audio.AudioService;
 import com.eve.eng1.screen.GameScreen;
 import com.eve.eng1.screen.LoadingScreen;
 
@@ -26,7 +27,7 @@ public class Main extends Game {
     private Batch batch;
     private OrthographicCamera camera;
     private AssetService assetService;
-
+    private AudioService audioService;
     // The specific part of the map that the player sees
     private Viewport viewport;
 
@@ -40,6 +41,7 @@ public class Main extends Game {
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         this.assetService = new AssetService(new InternalFileHandleResolver());
+        this.audioService = new AudioService(assetService);
 
         addScreen(new LoadingScreen(this, assetService));
         setScreen(LoadingScreen.class);
@@ -93,5 +95,9 @@ public class Main extends Game {
 
     public OrthographicCamera getCamera() {
         return camera;
+    }
+
+    public AudioService getAudioService(){
+        return audioService;
     }
 }

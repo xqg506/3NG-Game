@@ -13,6 +13,7 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
+import com.eve.eng1.audio.AudioService;
 import com.eve.eng1.system.RenderSystem;
 import com.eve.eng1.tiled.TiledAshleyConfigurator;
 import com.eve.eng1.tiled.TiledService;
@@ -23,6 +24,7 @@ public class GameScreen extends ScreenAdapter {
     private final AssetService assetService;
     private final Viewport viewport;
     private final OrthographicCamera camera;
+    private final AudioService audioService;
 
     private final Engine engine;
 
@@ -36,6 +38,7 @@ public class GameScreen extends ScreenAdapter {
         this.camera = game.getCamera();
         this.batch = game.getBatch();
         this.tiledService = new TiledService(this.assetService);
+        this.audioService = game.getAudioService();
 
 
         this.engine = new Engine();
@@ -48,9 +51,10 @@ public class GameScreen extends ScreenAdapter {
     public void show() {
 
         Consumer<TiledMap> renderConsumer = this.engine.getSystem(RenderSystem.class)::setMap;
-        this.tiledService.setMapChangeConsumer(renderConsumer);
-        this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
+        Consumer<TiledMap> audioConsumer = audioService::setMap;
 
+        this.tiledService.setMapChangeConsumer(renderConsumer.andThen(audioConsumer));
+        this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
         TiledMap tiledMap = this.tiledService.loadMap(MapAsset.BEDROOM);
         this.tiledService.setMap(tiledMap);
     }
