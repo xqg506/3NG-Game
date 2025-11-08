@@ -5,12 +5,15 @@ import java.util.function.Consumer;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
+import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
@@ -33,6 +36,8 @@ public class GameScreen extends ScreenAdapter {
     private final TiledAshleyConfigurator tiledAshleyConfigurator;
     private final World physicWorld;
     private final KeyboardController keyboardController;
+    private final Stage stage;
+    private final Viewport uiViewport;
 
     public GameScreen(Main game) {
         this.game = game;
@@ -46,7 +51,8 @@ public class GameScreen extends ScreenAdapter {
         this.physicWorld.setAutoClearForces(false);
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, game.getAssetService(), this.physicWorld);
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
-
+        this.uiViewport = new FitViewport(320f, 180f);
+        this.stage = new Stage(uiViewport, game.getBatch());
 
         this.engine.addSystem(new PhysicMoveSystem());
         this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
@@ -60,9 +66,14 @@ public class GameScreen extends ScreenAdapter {
     }
 
     @Override
-    public void show() {
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        this.uiViewport.update(width, height, true);
+    }
 
-        game.setInputProcessors(keyboardController);
+    @Override
+    public void show() {
+        game.setInputProcessors(stage, keyboardController);
         keyboardController.setActiveState(GameControllerState.class);
 
         Consumer<TiledMap> renderConsumer = this.engine.getSystem(RenderSystem.class)::setMap;
@@ -84,6 +95,11 @@ public class GameScreen extends ScreenAdapter {
         delta = Math.min(delta, 1 / 30f);
         this.engine.update(delta);
 
+        uiViewport.apply();
+        stage.getBatch().setColor(Color.WHITE);
+        stage.act(delta);
+        stage.draw();
+
     }
 
     @Override
@@ -94,5 +110,6 @@ public class GameScreen extends ScreenAdapter {
             }
         }
         this.physicWorld.dispose();
+        this.stage.dispose();
     }
 }

@@ -1,0 +1,45 @@
+
+skin.png
+size: 128, 128
+format: RGBA8888
+filter: Linear, Linear
+repeat: none
+white-pixel
+  rotate: false
+  xy: 35, 74
+  size: 1, 1
+  orig: 1, 1
+  offset: 0, 0
+  index: -1
+UI_Flat_BarFill01g
+  rotate: false
+  xy: 67, 94
+  size: 32, 3
+  orig: 32, 3
+  offset: 0, 0
+  index: -1
+banner
+  rotate: false
+  xy: 1, 77
+  size: 64, 20
+  split: 13, 13, 5, 6
+  orig: 64, 20
+  offset: 0, 0
+  index: -1
+button
+  rotate: false
+  xy: 1, 29
+  size: 32, 32
+  split: 2, 2, 7, 2
+  pad: 2, 2, 5, 5
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+slider_bar
+  rotate: false
+  xy: 1, 63
+  size: 32, 12
+  split: 0, 0, 0, 0
+  orig: 32, 12
+  offset: 0, 0
+  index: -1
