@@ -10,7 +10,6 @@ dependencies {
   api "com.github.raeleus.stripe:freetype:$stripeVersion"
   // ten patch for better ProgressBar support (scene2d)
   api "com.github.raeleus.TenPatch:tenpatch:$tenPatchVersion"
-  // typing label support
 
   if(enableGraalNative == 'true') {
     implementation "io.github.berstanio:gdx-svmhelper-annotations:$graalHelperVersion"

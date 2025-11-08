@@ -3,7 +3,7 @@ package com.eve.eng1.asset;
 import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 
-public enum SkinAsset implements Asset<Skin>{
+public enum SkinAsset implements Asset<Skin> {
     DEFAULT("skin.json");
 
     private final AssetDescriptor<Skin> descriptor;
@@ -12,9 +12,9 @@ public enum SkinAsset implements Asset<Skin>{
         this.descriptor = new AssetDescriptor<>("ui/" + skinJsonFile, Skin.class);
     }
 
+
     @Override
     public AssetDescriptor<Skin> getDescriptor() {
         return descriptor;
     }
-
 }

@@ -13,7 +13,7 @@ white-pixel
   index: -1
 UI_Flat_BarFill01g
   rotate: false
-  xy: 67, 94
+  xy: 1, 72
   size: 32, 3
   orig: 32, 3
   offset: 0, 0
@@ -28,7 +28,7 @@ banner
   index: -1
 button
   rotate: false
-  xy: 1, 29
+  xy: 1, 38
   size: 32, 32
   split: 2, 2, 7, 2
   pad: 2, 2, 5, 5
@@ -37,9 +37,10 @@ button
   index: -1
 slider_bar
   rotate: false
-  xy: 1, 63
-  size: 32, 12
-  split: 0, 0, 0, 0
-  orig: 32, 12
+  xy: 67, 89
+  size: 32, 8
+  split: 1, 1, 1, 1
+  pad: 1, 1, 1, 2
+  orig: 32, 8
   offset: 0, 0
   index: -1
