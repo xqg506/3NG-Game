@@ -20,7 +20,6 @@
   <object id="8" gid="2280" x="16.6011" y="225.633" width="32" height="32">
    <properties>
     <property name="controller" type="bool" value="true"/>
-    <property name="speed" type="float" value="6"/>
    </properties>
   </object>
   <object id="9" gid="2281" x="86.7314" y="150.195" width="32" height="32"/>

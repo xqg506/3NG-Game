@@ -56,14 +56,15 @@ public class PhysicSystem extends IteratingSystem implements EntityListener {
 
         while (this.accumulator >= this.interval) {
             this.accumulator -= this.interval;
+            super.update(deltaTime);
             this.world.step(interval, 6, 2);
         }
         world.clearForces();
 
         // Interpolation - a value between 0 and (nearly) 1.
-        float aplha = this.accumulator / this.interval;
+        float alpha = this.accumulator / this.interval;
         for (int i = 0; i < getEntities().size(); i++) {
-            this.interpolateEntity(getEntities().get(i), aplha);
+            this.interpolateEntity(getEntities().get(i), alpha);
         }
 
     }
@@ -78,11 +79,9 @@ public class PhysicSystem extends IteratingSystem implements EntityListener {
         Transform transform = Transform.MAPPER.get(entity);
         Physic physic = Physic.MAPPER.get(entity);
 
-
         transform.getPosition().set(
             MathUtils.lerp(physic.getPrevPosition().x, physic.getBody().getPosition().x, alpha),
             MathUtils.lerp(physic.getPrevPosition().y, physic.getBody().getPosition().y, alpha)
-
         );
     }
 
