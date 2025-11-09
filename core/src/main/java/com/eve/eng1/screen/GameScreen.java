@@ -52,11 +52,7 @@ public class GameScreen extends ScreenAdapter {
         this.viewport = game.getViewport();
         this.camera = game.getCamera();
         this.batch = game.getBatch();
-        this.tiledService = new TiledService(this.assetService);
         this.audioService = game.getAudioService();
-
-
-
 
         this.physicWorld = new World(Vector2.Zero, true);
         this.tiledService = new TiledService(game.getAssetService());

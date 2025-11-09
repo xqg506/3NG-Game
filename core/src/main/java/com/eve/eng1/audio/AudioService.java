@@ -36,6 +36,8 @@ public class AudioService {
         this.soundVolume = MathUtils.clamp(soundVolume, 0f, 1f);
     }
 
+    public float getSoundVolume(){return soundVolume;}
+
     public void playMusic(MusicAsset musicAsset){
         if (this.currentMusicAsset == musicAsset) return;
         if (this.currentMusic != null){
