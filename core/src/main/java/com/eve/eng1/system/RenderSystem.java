@@ -1,28 +1,26 @@
 package com.eve.eng1.system;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.systems.SortedIteratingSystem;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.tiles.AnimatedTiledMapTile;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.Main;
-import com.eve.eng1.asset.AssetService;
-import com.eve.eng1.asset.MapAsset;
 import com.eve.eng1.component.Graphic;
 import com.eve.eng1.component.Transform;
-
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class RenderSystem extends SortedIteratingSystem implements Disposable {
     private final OrthogonalTiledMapRenderer mapRenderer;
@@ -61,14 +59,20 @@ public class RenderSystem extends SortedIteratingSystem implements Disposable {
         batch.begin();
         this.batch.setColor(Color.WHITE);
         this.mapRenderer.setView(this.camera);
-        bgdLayers.forEach(mapRenderer::renderMapLayer);
+        //bgdLayers.forEach(mapRenderer::renderMapLayer); <---- this doesn't work for some reason, outdated?
+        for (MapLayer layer : bgdLayers) {
+            mapRenderer.renderTileLayer((TiledMapTileLayer) layer);
+        }
 
         // We do force sort because it needs to update dynamically and calculate the entities position
         forceSort();
         super.update(deltaTime);
 
         this.batch.setColor(Color.WHITE);
-        fgdLayers.forEach(mapRenderer::renderMapLayer);
+        //fgdLayers.forEach(mapRenderer::renderMapLayer);
+        for (MapLayer layer : fgdLayers) {
+            mapRenderer.renderTileLayer((TiledMapTileLayer) layer);
+        }
         batch.end();
     }
 
