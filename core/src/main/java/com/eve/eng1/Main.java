@@ -5,11 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.badlogic.ashley.core.Engine;
-import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.InputMultiplexer;
-import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.*;
 import com.badlogic.gdx.assets.loaders.resolvers.InternalFileHandleResolver;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -18,11 +14,10 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
-import com.eve.eng1.audio.AudioService;
-import com.eve.eng1.screen.GameScreen;
 import com.eve.eng1.input.ControllerState;
 import com.eve.eng1.input.GameControllerState;
 import com.eve.eng1.input.KeyboardController;
+import com.eve.eng1.audio.AudioService;
 import com.eve.eng1.screen.LoadingScreen;
 
 
@@ -35,10 +30,10 @@ public class Main extends Game {
     private Batch batch;
     private OrthographicCamera camera;
     private AssetService assetService;
-    private AudioService audioService;
     private Engine engine;
     private InputMultiplexer inputMultiplexer;
 
+    private AudioService audioService;
     // The specific part of the map that the player sees
     private Viewport viewport;
 
@@ -56,9 +51,12 @@ public class Main extends Game {
         this.assetService = new AssetService(new InternalFileHandleResolver());
         this.audioService = new AudioService(assetService);
         this.engine = new Engine();
-        KeyboardController keyboardController = new KeyboardController((Class<? extends ControllerState>) GameControllerState.class,engine);
+        KeyboardController keyboardController = new KeyboardController(
+    (Class<? extends ControllerState>) GameControllerState.class,
+    engine);
 
     inputMultiplexer.addProcessor(keyboardController);
+
         addScreen(new LoadingScreen(this, assetService));
         setScreen(LoadingScreen.class);
     }
@@ -96,6 +94,25 @@ public class Main extends Game {
         this.assetService.debugDiagnostics();
         this.assetService.dispose();
     }
+
+    public Batch getBatch() {
+        return batch;
+    }
+
+    public AssetService getAssetService() {
+        return assetService;
+    }
+
+    public Viewport getViewport() {
+        return viewport;
+    }
+
+    public OrthographicCamera getCamera() {
+        return camera;
+    }
+
+
+
     //Game updates
     public void render(float delta) {
         delta = Math.min(delta, 1 / 30f);
@@ -116,28 +133,8 @@ public class Main extends Game {
         }
 
     }
-    public Batch getBatch() {
-        return batch;
-    }
-
-    public AssetService getAssetService() {
-        return assetService;
-    }
-
-    public Viewport getViewport() {
-        return viewport;
-    }
-
-    public OrthographicCamera getCamera() {
-        return camera;
-    }
 
     public AudioService getAudioService(){
         return audioService;
     }
-
-
-
-
-
 }

@@ -6,6 +6,7 @@ import com.badlogic.gdx.audio.Sound;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.AtlasAsset;
+import com.eve.eng1.asset.SkinAsset;
 import com.eve.eng1.asset.SoundAsset;
 
 public class LoadingScreen extends ScreenAdapter {
@@ -27,6 +28,7 @@ public class LoadingScreen extends ScreenAdapter {
         for (AtlasAsset atlas : AtlasAsset.values()) {
             assetService.queue(atlas);
         }
+        assetService.queue(SkinAsset.DEFAULT);
         for (SoundAsset sound : SoundAsset.values()) {
             assetService.queue(sound);
         }
@@ -44,11 +46,13 @@ public class LoadingScreen extends ScreenAdapter {
             createScreens();
             this.game.removeScreen(this);
             this.dispose();
-            this.game.setScreen(GameScreen.class);
+            this.game.setScreen(MainMenuScreen.class);
         }
     }
 
+
     private void createScreens() {
+        this.game.addScreen(new MainMenuScreen(this.game));
         this.game.addScreen(new GameScreen(this.game));
     }
 
