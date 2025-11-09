@@ -18,7 +18,7 @@ public class AudioService {
         this.currentMusic = null;
         this.currentMusicAsset = null;
         this.musicVolume = 0.5f;
-        this.soundVolume = 0.33f;
+        this.soundVolume = 0.5f;
     }
 
     public void setMusicVolume(float musicVolume){

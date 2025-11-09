@@ -10,6 +10,9 @@
  <tileset firstgid="856" source="Interiors_free_16x16.tsx"/>
  <tileset firstgid="2280" source="objects.tsx"/>
  <layer id="1" name="ground" width="15" height="14">
+  <properties>
+   <property name="music" value="MUSIC_RELAX"/>
+  </properties>
   <data encoding="base64" compression="zlib">
    eJwzYWBgMBnFROGJQDyJTHoyEE/BQk/EIY5M08JeYuhRe4mnATX9XGk=
   </data>

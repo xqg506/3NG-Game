@@ -47,7 +47,7 @@ public class Main extends Game {
     @Override
     public void create() {
         this.inputMultiplexer = new InputMultiplexer();
-                
+
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         this.batch = new SpriteBatch();
@@ -56,12 +56,9 @@ public class Main extends Game {
         this.assetService = new AssetService(new InternalFileHandleResolver());
         this.audioService = new AudioService(assetService);
         this.engine = new Engine();
-        KeyboardController keyboardController = new KeyboardController(
-    (Class<? extends ControllerState>) GameControllerState.class,
-    engine);
+        KeyboardController keyboardController = new KeyboardController((Class<? extends ControllerState>) GameControllerState.class,engine);
 
     inputMultiplexer.addProcessor(keyboardController);
-
         addScreen(new LoadingScreen(this, assetService));
         setScreen(LoadingScreen.class);
     }
@@ -99,7 +96,26 @@ public class Main extends Game {
         this.assetService.debugDiagnostics();
         this.assetService.dispose();
     }
+    //Game updates
+    public void render(float delta) {
+        delta = Math.min(delta, 1 / 30f);
+        this.engine.update(delta);
+    }
 
+    public void setInputProcessors(InputProcessor... processors) {
+        //Resetting anything currently in + setting up inputs
+        if (inputMultiplexer == null) {
+            return;
+        }
+        inputMultiplexer.clear();
+
+        if (processors == null) return;
+
+        for (InputProcessor processor : processors) {
+            inputMultiplexer.addProcessor(processor);
+        }
+
+    }
     public Batch getBatch() {
         return batch;
     }
@@ -119,25 +135,9 @@ public class Main extends Game {
     public AudioService getAudioService(){
         return audioService;
     }
-    //Game updates 
-    public void render(float delta) {
-        delta = Math.min(delta, 1 / 30f);
-        this.engine.update(delta);
-        }
 
-    public void setInputProcessors(InputProcessor... processors) {
-        //Resetting anything currently in + setting up inputs
-        if (inputMultiplexer == null) {
-            return;
-        }
-        inputMultiplexer.clear();
 
-        if (processors == null) return;
 
-        for (InputProcessor processor : processors) {
-            inputMultiplexer.addProcessor(processor);
-        }
 
-    }
-    
+
 }

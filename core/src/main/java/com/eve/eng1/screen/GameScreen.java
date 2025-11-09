@@ -5,11 +5,15 @@ import java.util.function.Consumer;
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
 import com.badlogic.gdx.utils.Disposable;
+import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.Main;
+import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
 import com.eve.eng1.audio.AudioService;
 import com.eve.eng1.input.GameControllerState;
@@ -51,21 +55,19 @@ public class GameScreen extends ScreenAdapter {
 
 
         this.physicWorld = new World(Vector2.Zero, true);
-        this.tiledService = new TiledService(game.getAssetService());
         this.engine = new Engine();
         this.physicWorld.setAutoClearForces(false);
         this.tiledAshleyConfigurator = new TiledAshleyConfigurator(this.engine, game.getAssetService(), this.physicWorld);
         this.keyboardController = new KeyboardController(GameControllerState.class, engine);
 
-
         this.engine.addSystem(new PhysicMoveSystem());
         this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
-        this.engine.addSystem(new ControllerSystem());
+        this.engine.addSystem(new ControllerSystem(game.getAudioService()));
         //Fsm system goes here
         //Facing system goes here
 
         //Animation system goes here
-        this.engine.addSystem(new RenderSystem(game.getBatch(), game.getViewport(), game.getCamera()));
+        this.engine.addSystem(new RenderSystem(this.batch, this.viewport, this.camera));
         this.engine.addSystem(new PhysicDebugRenderSystem(physicWorld, game.getCamera()));
     }
 
@@ -79,8 +81,6 @@ public class GameScreen extends ScreenAdapter {
         Consumer<TiledMap> audioConsumer = audioService::setMap;
 
         this.tiledService.setMapChangeConsumer(renderConsumer.andThen(audioConsumer));
-        this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
-        this.tiledService.setMapChangeConsumer(renderConsumer);
         this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
         this.tiledService.setLoadTileConsumer(tiledAshleyConfigurator::onLoadTile);
         TiledMap tiledMap = this.tiledService.loadMap(MapAsset.BEDROOM);
