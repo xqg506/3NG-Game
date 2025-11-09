@@ -18,6 +18,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.asset.AssetService;
+import com.eve.eng1.audio.AudioService;
+import com.eve.eng1.screen.GameScreen;
 import com.eve.eng1.input.ControllerState;
 import com.eve.eng1.input.GameControllerState;
 import com.eve.eng1.input.KeyboardController;
@@ -33,6 +35,7 @@ public class Main extends Game {
     private Batch batch;
     private OrthographicCamera camera;
     private AssetService assetService;
+    private AudioService audioService;
     private Engine engine;
     private InputMultiplexer inputMultiplexer;
 
@@ -51,6 +54,7 @@ public class Main extends Game {
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         this.assetService = new AssetService(new InternalFileHandleResolver());
+        this.audioService = new AudioService(assetService);
         this.engine = new Engine();
         KeyboardController keyboardController = new KeyboardController(
     (Class<? extends ControllerState>) GameControllerState.class,
@@ -112,6 +116,9 @@ public class Main extends Game {
         return camera;
     }
 
+    public AudioService getAudioService(){
+        return audioService;
+    }
     //Game updates 
     public void render(float delta) {
         delta = Math.min(delta, 1 / 30f);
