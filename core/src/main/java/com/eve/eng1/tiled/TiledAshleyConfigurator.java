@@ -2,8 +2,8 @@ package com.eve.eng1.tiled;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.Animation.PlayMode;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
@@ -12,11 +12,22 @@ import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.physics.box2d.Body;
+import com.badlogic.gdx.physics.box2d.BodyDef;
+import com.badlogic.gdx.physics.box2d.Fixture;
+import com.badlogic.gdx.physics.box2d.FixtureDef;
+import com.badlogic.gdx.physics.box2d.World;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.AtlasAsset;
-import com.eve.eng1.component.*;
+import com.eve.eng1.component.Animation2D;
+import com.eve.eng1.component.Animation2D.AnimationType;
+import com.eve.eng1.component.Controller;
+import com.eve.eng1.component.Facing;
+import com.eve.eng1.component.Fsm;
+import com.eve.eng1.component.Graphic;
+import com.eve.eng1.component.Move;
+import com.eve.eng1.component.Physic;
 import com.eve.eng1.component.Transform;
 
 public class TiledAshleyConfigurator {
@@ -87,6 +98,9 @@ public class TiledAshleyConfigurator {
         );
         addEntityController(tileMapObject, entity);
         addEntityMove(tile, entity);
+        addEntityAnimation(tile, entity);
+        entity.add(new Facing(Facing.FacingDirection.D));
+        entity.add(new Fsm(entity));
         BodyDef.BodyType bodyType = getObjectBodyType(tile);
         addEntityPhysic(tile.getObjects(), bodyType, Vector2.Zero, entity);
 
@@ -107,6 +121,19 @@ public class TiledAshleyConfigurator {
         Body body = createBody(objects, transform.getPosition(), transform.getScaling(), bodyType, relativeTo,
             entity);
         entity.add(new Physic(body, transform.getPosition().cpy()));
+    }
+
+    private void addEntityAnimation(TiledMapTile tile, Entity entity) {
+        String animationStr = tile.getProperties().get("animation", "", String.class);
+        if (animationStr.isBlank()) return;
+
+        AnimationType animationType = AnimationType.valueOf(animationStr);
+        String atlasAssetStr = tile.getProperties().get("atlasAsset","OBJECTS", String.class);
+        AtlasAsset atlasAsset = AtlasAsset.valueOf(atlasAssetStr);
+        FileTextureData textureData = (FileTextureData) tile.getTextureRegion().getTexture().getTextureData();
+        String atlasKey = textureData.getFileHandle().nameWithoutExtension();
+        float speed = tile.getProperties().get("animationSpeed", 0f, Float.class);
+        entity.add(new Animation2D(atlasAsset, atlasKey, animationType, PlayMode.LOOP, speed));
     }
 
     private void addEntityMove(TiledMapTile tile, Entity entity) {
