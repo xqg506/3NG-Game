@@ -2,10 +2,12 @@ package com.eve.eng1.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.audio.Sound;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.AtlasAsset;
 import com.eve.eng1.asset.SkinAsset;
+import com.eve.eng1.asset.SoundAsset;
 
 public class LoadingScreen extends ScreenAdapter {
 
@@ -27,6 +29,9 @@ public class LoadingScreen extends ScreenAdapter {
             assetService.queue(atlas);
         }
         assetService.queue(SkinAsset.DEFAULT);
+        for (SoundAsset sound : SoundAsset.values()) {
+            assetService.queue(sound);
+        }
     }
 
     @Override

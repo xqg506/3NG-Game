@@ -21,6 +21,8 @@ import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.input.ControllerState;
 import com.eve.eng1.input.GameControllerState;
 import com.eve.eng1.input.KeyboardController;
+import com.eve.eng1.audio.AudioService;
+import com.eve.eng1.screen.GameScreen;
 import com.eve.eng1.screen.LoadingScreen;
 
 
@@ -36,6 +38,7 @@ public class Main extends Game {
     private Engine engine;
     private InputMultiplexer inputMultiplexer;
 
+    private AudioService audioService;
     // The specific part of the map that the player sees
     private Viewport viewport;
 
@@ -44,13 +47,14 @@ public class Main extends Game {
     @Override
     public void create() {
         this.inputMultiplexer = new InputMultiplexer();
-                
+
         Gdx.input.setInputProcessor(inputMultiplexer);
 
         this.batch = new SpriteBatch();
         this.camera = new OrthographicCamera();
         this.viewport = new FitViewport(WORLD_WIDTH, WORLD_HEIGHT, camera);
         this.assetService = new AssetService(new InternalFileHandleResolver());
+        this.audioService = new AudioService(assetService);
         this.engine = new Engine();
         KeyboardController keyboardController = new KeyboardController(
     (Class<? extends ControllerState>) GameControllerState.class,
@@ -112,7 +116,7 @@ public class Main extends Game {
         return camera;
     }
 
-    //Game updates 
+    //Game updates
     public void render(float delta) {
         delta = Math.min(delta, 1 / 30f);
         this.engine.update(delta);
@@ -132,5 +136,9 @@ public class Main extends Game {
         }
 
     }
-    
+
+
+    public AudioService getAudioService(){
+        return audioService;
+    }
 }

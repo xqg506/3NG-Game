@@ -18,6 +18,8 @@ import com.badlogic.gdx.utils.viewport.Viewport;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
+import com.eve.eng1.audio.AudioService;
+import com.eve.eng1.system.RenderSystem;
 import com.eve.eng1.input.GameControllerState;
 import com.eve.eng1.input.KeyboardController;
 import com.eve.eng1.system.*;
@@ -27,6 +29,11 @@ import com.eve.eng1.tiled.TiledService;
 
 public class GameScreen extends ScreenAdapter {
     private final Main game;
+    private final Batch batch;
+    private final AssetService assetService;
+    private final Viewport viewport;
+    private final OrthographicCamera camera;
+    private final AudioService audioService;
 
 
 
@@ -41,6 +48,12 @@ public class GameScreen extends ScreenAdapter {
 
     public GameScreen(Main game) {
         this.game = game;
+        this.assetService = game.getAssetService();
+        this.viewport = game.getViewport();
+        this.camera = game.getCamera();
+        this.batch = game.getBatch();
+        this.tiledService = new TiledService(this.assetService);
+        this.audioService = game.getAudioService();
 
 
 
@@ -77,7 +90,9 @@ public class GameScreen extends ScreenAdapter {
         keyboardController.setActiveState(GameControllerState.class);
 
         Consumer<TiledMap> renderConsumer = this.engine.getSystem(RenderSystem.class)::setMap;
-        this.tiledService.setMapChangeConsumer(renderConsumer);
+        Consumer<TiledMap> audioConsumer = audioService::setMap;
+
+        this.tiledService.setMapChangeConsumer(renderConsumer.andThen(audioConsumer));
         this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
         this.tiledService.setLoadTileConsumer(tiledAshleyConfigurator::onLoadTile);
         TiledMap tiledMap = this.tiledService.loadMap(MapAsset.BEDROOM);
