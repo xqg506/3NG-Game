@@ -16,7 +16,7 @@ public class Hud {
 
     public Hud(SpriteBatch batch) {
         stage = new Stage(new ScreenViewport(), batch);
-        timer = new CountdownTimer(10);
+        timer = new CountdownTimer(300);
 
         Label.LabelStyle style = new Label.LabelStyle();
         style.font = new BitmapFont();
@@ -36,6 +36,7 @@ public class Hud {
     }
 
     public void startTimer() {
+        timer.reset(300);
         timer.start();
     }
 

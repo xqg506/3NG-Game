@@ -135,13 +135,8 @@ public class GameScreen extends ScreenAdapter {
             goToMainMenu();
         }
     }
-    private void goToMainMenu(){
-        Screen oldScreen = game.getScreen();
-        game.setScreen(new MainMenuScreen(game));
-        if (oldScreen != null) {
-            oldScreen.dispose();
-        }
-    }
+
+
     @Override
     public void dispose() {
         for (EntitySystem system : this.engine.getSystems()) {
@@ -149,7 +144,12 @@ public class GameScreen extends ScreenAdapter {
                 disposableSystem.dispose();
             }
         }
-        this.physicWorld.dispose();
-        this.stage.dispose();
+        physicWorld.dispose();
+        stage.dispose();
+    }
+
+    private void goToMainMenu(){
+        game.setScreen(MainMenuScreen.class);
+
     }
 }
