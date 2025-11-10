@@ -1,19 +1,355 @@
 
 objects.png
-size: 128, 64
+size: 512, 256
 format: RGBA8888
 filter: Nearest, Nearest
 repeat: none
 backpack/backpack
   rotate: false
-  xy: 2, 2
+  xy: 2, 218
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-player/person
+player/animframes/idled
+  rotate: false
+  xy: 2, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/idled
+  rotate: false
+  xy: 38, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/idled
+  rotate: false
+  xy: 2, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/idled
+  rotate: false
+  xy: 38, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/idled
+  rotate: false
+  xy: 74, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/idled
+  rotate: false
+  xy: 2, 110
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/animframes/idlel
+  rotate: false
+  xy: 38, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/idlel
+  rotate: false
+  xy: 74, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/idlel
+  rotate: false
+  xy: 110, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/idlel
+  rotate: false
+  xy: 2, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/idlel
+  rotate: false
+  xy: 38, 110
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/idlel
+  rotate: false
+  xy: 74, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/animframes/idler
+  rotate: false
+  xy: 110, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/idler
+  rotate: false
+  xy: 146, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/idler
+  rotate: false
+  xy: 2, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/idler
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/idler
+  rotate: false
+  xy: 74, 110
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/idler
+  rotate: false
+  xy: 110, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/animframes/idleu
+  rotate: false
+  xy: 146, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/idleu
+  rotate: false
+  xy: 182, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/idleu
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/idleu
+  rotate: false
+  xy: 38, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/idleu
+  rotate: false
+  xy: 74, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/idleu
+  rotate: false
+  xy: 110, 110
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/animframes/walkd
+  rotate: false
+  xy: 182, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/walkd
+  rotate: false
+  xy: 218, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/walkd
   rotate: false
   xy: 38, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/walkd
+  rotate: false
+  xy: 74, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/walkd
+  rotate: false
+  xy: 110, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/walkd
+  rotate: false
+  xy: 146, 110
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/animframes/walkl
+  rotate: false
+  xy: 182, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/walkl
+  rotate: false
+  xy: 218, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/walkl
+  rotate: false
+  xy: 254, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/walkl
+  rotate: false
+  xy: 74, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/walkl
+  rotate: false
+  xy: 110, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/walkl
+  rotate: false
+  xy: 146, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/animframes/walkr
+  rotate: false
+  xy: 182, 110
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/walkr
+  rotate: false
+  xy: 218, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/walkr
+  rotate: false
+  xy: 254, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/walkr
+  rotate: false
+  xy: 290, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/walkr
+  rotate: false
+  xy: 110, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/walkr
+  rotate: false
+  xy: 146, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/animframes/walku
+  rotate: false
+  xy: 182, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 0
+player/animframes/walku
+  rotate: false
+  xy: 218, 110
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 1
+player/animframes/walku
+  rotate: false
+  xy: 254, 146
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 2
+player/animframes/walku
+  rotate: false
+  xy: 290, 182
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 3
+player/animframes/walku
+  rotate: false
+  xy: 326, 218
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 4
+player/animframes/walku
+  rotate: false
+  xy: 146, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: 5
+player/person
+  rotate: false
+  xy: 146, 146
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

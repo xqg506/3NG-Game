@@ -3,18 +3,23 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "objects.tsx",
+    "activeFile": "bedroom.tmx",
     "expandedProjectPaths": [
         "."
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
-        "/home/charles/Uni/3NG-Game/assets/objects/objects.tsx": {
+        "C:/home/charles/Uni/3NG-Game/assets/objects/objects.tsx": {
             "scaleInDock": 1
         },
         "Interiors_free_16x16.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Room_Builder_free_16x16.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "bedroom.tmx": {
             "scale": 4,
@@ -25,10 +30,13 @@
             }
         },
         "beds.tsx": {
-            "scaleInDock": 1
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "decorations.tsx": {
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "objects.tsx": {
             "dynamicWrapping": true,
@@ -50,10 +58,13 @@
         },
         "sprite_03.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 1
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         },
         "wardrobes.tsx": {
-            "scaleInDock": 1
+            "dynamicWrapping": false,
+            "scaleInDock": 1,
+            "scaleInEditor": 1
         }
     },
     "last.externalTilesetPath": "/home/charles/Uni/3NG-Game/assets/maps/Flooring Tilesets/Wooden Planks",
@@ -66,13 +77,25 @@
     "map.width": 15,
     "openFiles": [
         "bedroom.tmx",
-        "objects.tsx"
+        "objects.tsx",
+        "wardrobes.tsx",
+        "sprite_03.tsx",
+        "Room_Builder_free_16x16.tsx",
+        "Interiors_free_16x16.tsx",
+        "decorations.tsx",
+        "beds.tsx"
     ],
     "project": "3NG-Game.tiled-project",
     "property.type": "int",
     "recentFiles": [
-        "bedroom.tmx",
+        "beds.tsx",
+        "decorations.tsx",
+        "Interiors_free_16x16.tsx",
+        "Room_Builder_free_16x16.tsx",
+        "sprite_03.tsx",
+        "wardrobes.tsx",
         "objects.tsx",
+        "bedroom.tmx",
         "sprite_02.tsx",
         "sprite_01.tsx",
         "sprite_00.tsx"

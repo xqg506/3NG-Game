@@ -21,7 +21,7 @@ public class MainMenuScreen extends ScreenAdapter {
 
     public MainMenuScreen(Main game) {
         this.game = game;
-        this.uiViewport = new FitViewport(800f, 450f);
+        this.uiViewport = new FitViewport(800f, 600f);
         this.stage = new Stage(uiViewport, game.getBatch());
         this.skin = game.getAssetService().get(SkinAsset.DEFAULT);
     }

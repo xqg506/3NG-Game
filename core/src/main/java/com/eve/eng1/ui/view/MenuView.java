@@ -74,5 +74,4 @@ public class MenuView extends View<MenuViewModel> {
 
         return slider;
     }
-
 }
