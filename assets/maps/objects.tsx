@@ -17,7 +17,6 @@
  </tile>
  <tile id="1" type="GameObject">
   <properties>
-   <property name="animation" value="IDLE"/>
    <property name="animationSpeed" type="float" value="0"/>
    <property name="atlasAsset" value="OBJECTS"/>
    <property name="speed" type="float" value="0"/>
