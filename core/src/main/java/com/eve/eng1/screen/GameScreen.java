@@ -76,6 +76,7 @@ public class GameScreen extends ScreenAdapter {
         //Facing system goes here
 
         //Animation system goes here
+        this.engine.addSystem(new TriggerSystem(game.getAudioService()));
         this.engine.addSystem(new RenderSystem(game.getBatch(), game.getViewport(), game.getCamera()));
         this.engine.addSystem(new PhysicDebugRenderSystem(physicWorld, game.getCamera()));
     }
@@ -97,6 +98,7 @@ public class GameScreen extends ScreenAdapter {
         this.tiledService.setMapChangeConsumer(renderConsumer.andThen(audioConsumer));
         this.tiledService.setLoadObjectConsumer(this.tiledAshleyConfigurator::onLoadObject);
         this.tiledService.setLoadTileConsumer(tiledAshleyConfigurator::onLoadTile);
+        this.tiledService.setLoadTriggerConsumer(this.tiledAshleyConfigurator::onLoadTrigger);
         TiledMap tiledMap = this.tiledService.loadMap(MapAsset.BEDROOM);
         this.tiledService.setMap(tiledMap);
     }

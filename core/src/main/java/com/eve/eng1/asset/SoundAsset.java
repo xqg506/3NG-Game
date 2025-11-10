@@ -4,7 +4,9 @@ import com.badlogic.gdx.assets.AssetDescriptor;
 import com.badlogic.gdx.audio.Sound;
 
 public enum SoundAsset implements Asset<Sound> {
-    WALKING("walking.wav");
+    WALKING("walking.wav"),
+    SWING("swing.wav");
+
     private final AssetDescriptor<Sound> descriptor;
 
     SoundAsset(String musicFile) {

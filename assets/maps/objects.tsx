@@ -15,13 +15,14 @@
    </object>
   </objectgroup>
  </tile>
- <tile id="1" type="Prop">
+ <tile id="1" type="GameObject">
   <properties>
+   <property name="animation" value="IDLE"/>
+   <property name="animationSpeed" type="float" value="0"/>
    <property name="atlasAsset" value="OBJECTS"/>
+   <property name="speed" type="float" value="0"/>
+   <property name="z" type="int" value="0"/>
   </properties>
   <image source="objects/backpack.png" width="32" height="32"/>
-  <objectgroup draworder="index" id="2">
-   <object id="1" x="8" y="7" width="16" height="16"/>
-  </objectgroup>
  </tile>
 </tileset>

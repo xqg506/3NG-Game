@@ -9,10 +9,13 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.FileTextureData;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.objects.TiledMapTileMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.AtlasAsset;
@@ -25,11 +28,15 @@ public class TiledAshleyConfigurator {
     private final Engine engine;
     private final AssetService assetService;
     private final World physicWorld;
+    private final Vector2 tmpVec2;
+    private final MapObjects tmpMapObjects;
 
     public TiledAshleyConfigurator(Engine engine, AssetService assetService, World physicWorld) {
         this.engine = engine;
         this.assetService = assetService;
         this.physicWorld = physicWorld;
+        this.tmpVec2 = new Vector2();
+        this.tmpMapObjects = new MapObjects();
     }
 
     public void onLoadTile(TiledMapTile tiledMapTile, float x, float y) {
@@ -85,13 +92,24 @@ public class TiledAshleyConfigurator {
             tileMapObject.getScaleX(), tileMapObject.getScaleY(),
             entity
         );
-        addEntityController(tileMapObject, entity);
-        addEntityMove(tile, entity);
         BodyDef.BodyType bodyType = getObjectBodyType(tile);
         addEntityPhysic(tile.getObjects(), bodyType, Vector2.Zero, entity);
 
+        addEntityController(tileMapObject, entity);
+        addEntityMove(tile, entity);
+        entity.add(new Tiled(tileMapObject));
+        addEntityPlayer(tileMapObject, entity);
+
+
         this.engine.addEntity(entity);
     }
+
+    private void addEntityPlayer(TiledMapTileMapObject tileMapObject, Entity entity) {
+        if ("Player".equals(tileMapObject.getName())) {
+            entity.add(new Player());
+        }
+    }
+
 
     private BodyDef.BodyType getObjectBodyType(TiledMapTile tile) {
         String classType = tile.getProperties().get("type", String.class);
@@ -158,5 +176,28 @@ public class TiledAshleyConfigurator {
         return tile.getTextureRegion();
     }
 
+    private void addEntityPhysic(MapObject mapObject, BodyDef.BodyType bodyType, Vector2 relativeTo, Entity entity) {
+        if(tmpMapObjects.getCount() > 0) {
+            tmpMapObjects.remove(0);
+        };
 
+        tmpMapObjects.add(mapObject);
+        addEntityPhysic(tmpMapObjects, bodyType, relativeTo, entity);
+    }
+
+    public void onLoadTrigger(String triggerName, MapObject triggerMapObject) {
+        if(triggerMapObject instanceof RectangleMapObject rectMapObject) {
+            Entity entity = this.engine.createEntity();
+            Rectangle rect =  rectMapObject.getRectangle();
+
+            addEntityTransform(rect.getX(), rect.getY(), 0, rect.getWidth(), rect.getHeight(), 1f, 1f, entity);
+            addEntityPhysic(triggerMapObject, BodyDef.BodyType.StaticBody, tmpVec2.set(rect.getX(), rect.getY()).scl(Main.UNIT_SCALE), entity);
+            entity.add(new Trigger(triggerName));
+            entity.add(new Tiled(rectMapObject));
+
+            this.engine.addEntity(entity);
+        } else {
+            throw new GdxRuntimeException("Unsupported trigger map object: " + triggerName);
+        };
+    }
 }

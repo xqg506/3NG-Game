@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "bedroom.tmx",
+    "activeFile": "objects.tsx",
     "expandedProjectPaths": [
         "."
     ],
@@ -17,11 +17,11 @@
             "scaleInDock": 1
         },
         "bedroom.tmx": {
-            "scale": 2.6379464285714285,
-            "selectedLayer": 2,
+            "scale": 4,
+            "selectedLayer": 3,
             "viewCenter": {
-                "x": 119.97969199526148,
-                "y": 157.88796750719246
+                "x": 199.125,
+                "y": 187.375
             }
         },
         "beds.tsx": {
@@ -69,10 +69,10 @@
         "objects.tsx"
     ],
     "project": "3NG-Game.tiled-project",
-    "property.type": "bool",
+    "property.type": "int",
     "recentFiles": [
-        "objects.tsx",
         "bedroom.tmx",
+        "objects.tsx",
         "sprite_02.tsx",
         "sprite_01.tsx",
         "sprite_00.tsx"

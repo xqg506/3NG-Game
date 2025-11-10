@@ -2,6 +2,7 @@ package com.eve.eng1.tiled;
 
 import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapTile;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
@@ -10,6 +11,7 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.MapAsset;
 
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class TiledService {
@@ -20,6 +22,8 @@ public class TiledService {
     private Consumer<TiledMap> mapChangeConsumer;
     private Consumer<TiledMapTileMapObject> loadObjectConsumer;
     private LoadTileConsumer loadTileConsumer;
+    private BiConsumer<String, MapObject> loadTriggerConsumer;
+
 
     public TiledService(AssetService assetService) {
         this.assetService = assetService;
@@ -27,6 +31,7 @@ public class TiledService {
         this.loadObjectConsumer = null;
         this.currentMap = null;
         this.loadTileConsumer = null;
+        this.loadTriggerConsumer = null;
     }
 
     public TiledMap loadMap(MapAsset mapAsset) {
@@ -55,6 +60,24 @@ public class TiledService {
                 loadObjectLayer(layer);
             } else if(layer instanceof TiledMapTileLayer tileLayer) {
                 loadTileLayer(tileLayer);
+            } else if ("trigger".equals(layer.getName())) {
+                loadTriggerLayer(layer);
+            }
+        }
+    }
+
+    private void loadTriggerLayer(MapLayer layer) {
+        if(loadTriggerConsumer == null) return;
+
+        for (MapObject mapObject : layer.getObjects()) {
+            if(mapObject.getName() == null || mapObject.getName().isBlank()){
+                throw new GdxRuntimeException("Trigger name is null or blank");
+            }
+
+            if(mapObject instanceof RectangleMapObject rectMapObject) {
+                loadTriggerConsumer.accept(mapObject.getName(), rectMapObject);
+            } else {
+                throw new GdxRuntimeException("Trigger object type is not supported");
             }
         }
     }
@@ -96,6 +119,10 @@ public class TiledService {
 
     public void setLoadTileConsumer(LoadTileConsumer loadTileConsumer) {
         this.loadTileConsumer = loadTileConsumer;
+    }
+
+    public void setLoadTriggerConsumer(BiConsumer<String, MapObject> loadTriggerConsumer) {
+        this.loadTriggerConsumer = loadTriggerConsumer;
     }
 
     @FunctionalInterface

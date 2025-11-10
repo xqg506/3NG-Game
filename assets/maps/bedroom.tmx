@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="5" nextobjectid="10">
+<map version="1.10" tiledversion="1.11.2" orientation="orthogonal" renderorder="right-down" width="15" height="14" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="16">
  <properties>
   <property name="music" value="MUSIC_RELAX"/>
  </properties>
@@ -23,12 +23,19 @@
   </data>
  </layer>
  <objectgroup id="4" name="objects">
-  <object id="8" gid="2280" x="16.6011" y="225.633" width="32" height="32">
+  <object id="8" name="Player" gid="2280" x="16.6011" y="225.633" width="32" height="32">
    <properties>
     <property name="controller" type="bool" value="true"/>
    </properties>
   </object>
-  <object id="9" gid="2281" x="86.7314" y="150.195" width="32" height="32"/>
+  <object id="15" gid="2281" x="88.75" y="148.75" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="5" name="trigger" visible="0">
+  <object id="11" name="backpack_trigger" x="93.7778" y="122.406" width="20.9091" height="21.2727">
+   <properties>
+    <property name="sensor" type="bool" value="true"/>
+   </properties>
+  </object>
  </objectgroup>
  <layer id="3" name="foreground" width="15" height="14">
   <data encoding="base64" compression="zlib">
