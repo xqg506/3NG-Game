@@ -39,6 +39,7 @@ import com.eve.eng1.system.*;
 import com.eve.eng1.tiled.TiledAshleyConfigurator;
 import com.eve.eng1.tiled.TiledService;
 import com.eve.eng1.ui.Hud;
+import com.eve.eng1.util.ExitValidation;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -84,10 +85,6 @@ public class GameScreen extends ScreenAdapter {
         this.engine.addSystem(new PhysicSystem(physicWorld, 1 / 60f));
         this.engine.addSystem(new ControllerSystem(game.getAudioService()));
         this.engine.addSystem(new AnimationSystem(game.getAssetService()));
-        //Fsm system goes here
-        //Facing system goes here
-
-        //Animation system goes here
         this.engine.addSystem(new TriggerSystem(game.getAudioService()));
         this.engine.addSystem(new RenderSystem(game.getBatch(), game.getViewport(), game.getCamera()));
         this.engine.addSystem(new PhysicDebugRenderSystem(physicWorld, game.getCamera()));
@@ -141,6 +138,10 @@ public class GameScreen extends ScreenAdapter {
 
         if (hud.isTimeUp()){
             goToMainMenu();
+        }
+
+        if(ExitValidation.getBackpack_value() && ExitValidation.getDoor_validation()){
+            Gdx.app.exit();
         }
     }
 

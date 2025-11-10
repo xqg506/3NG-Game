@@ -10,6 +10,7 @@ import com.eve.eng1.asset.SoundAsset;
 import com.eve.eng1.audio.AudioService;
 import com.eve.eng1.component.Tiled;
 import com.eve.eng1.component.Trigger;
+import com.eve.eng1.util.ExitValidation;
 
 public class TriggerSystem extends IteratingSystem {
     private final AudioService audioService;
@@ -30,6 +31,7 @@ public class TriggerSystem extends IteratingSystem {
     private void fireTrigger(String triggerName, Entity triggeringEntity) {
         switch (triggerName) {
             case "backpack_trigger" -> executeBackpackScript(triggeringEntity);
+            case "door_trigger" -> executeDoorScript();
             default -> throw new GdxRuntimeException("Unsupported trigger: " + triggerName);
         }
     }
@@ -43,7 +45,18 @@ public class TriggerSystem extends IteratingSystem {
 
         getEngine().removeEntity(backpackEntity);
 
+        ExitValidation.setBackpack_value(true);
+
     }
+
+    private void executeDoorScript() {
+        System.out.println("executing door script");
+        if (ExitValidation.getBackpack_value()) {
+            ExitValidation.setDoor_validation(true);
+        }
+    }
+
+
 
     private Entity entityByTiledId(int tiledID) {
         ImmutableArray<Entity> entities = getEngine().getEntitiesFor(Family.all(Tiled.class).get());

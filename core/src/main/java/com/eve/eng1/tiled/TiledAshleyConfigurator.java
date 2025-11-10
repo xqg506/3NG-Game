@@ -24,14 +24,8 @@ import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.eve.eng1.Main;
 import com.eve.eng1.asset.AssetService;
 import com.eve.eng1.asset.AtlasAsset;
-import com.eve.eng1.component.Animation2D;
+import com.eve.eng1.component.*;
 import com.eve.eng1.component.Animation2D.AnimationType;
-import com.eve.eng1.component.Controller;
-import com.eve.eng1.component.Facing;
-import com.eve.eng1.component.Fsm;
-import com.eve.eng1.component.Graphic;
-import com.eve.eng1.component.Move;
-import com.eve.eng1.component.Physic;
 import com.eve.eng1.component.Transform;
 
 public class TiledAshleyConfigurator {
@@ -104,8 +98,6 @@ public class TiledAshleyConfigurator {
             tileMapObject.getScaleX(), tileMapObject.getScaleY(),
             entity
         );
-        addEntityController(tileMapObject, entity);
-        addEntityMove(tile, entity);
         addEntityAnimation(tile, entity);
         entity.add(new Facing(Facing.FacingDirection.D));
         entity.add(new Fsm(entity));
