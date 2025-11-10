@@ -108,14 +108,14 @@ public class PhysicSystem extends IteratingSystem implements EntityListener, Con
 
     private void playerTriggerContact(Entity entityA, Fixture fixtureA, Entity entityB, Fixture fixtureB) {
         Trigger trigger = Trigger.MAPPER.get(entityA);
-        boolean isPlayer = Player.MAPPER.get(entityA) != null && !fixtureB.isSensor();
+        boolean isPlayer = Player.MAPPER.get(entityB) != null && !fixtureB.isSensor();
         if(trigger != null && isPlayer){
             trigger.setTriggeringEntity(entityB);
             return;
         }
 
         trigger = Trigger.MAPPER.get(entityB);
-        isPlayer = Player.MAPPER.get(entityB) != null && !fixtureA.isSensor();
+        isPlayer = Player.MAPPER.get(entityA) != null && !fixtureA.isSensor();
         if(trigger != null && isPlayer){
             trigger.setTriggeringEntity(entityA);
         }
