@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.eve.eng1.Main;
 import com.eve.eng1.audio.AudioService;
 import com.eve.eng1.screen.GameScreen;
+import com.eve.eng1.ui.model.ViewModel;
+
 
 public class MenuViewModel extends ViewModel {
     private final AudioService audioService;
