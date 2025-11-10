@@ -4,10 +4,14 @@ import java.util.function.Consumer;
 
 import com.badlogic.ashley.core.Engine;
 import com.badlogic.ashley.core.EntitySystem;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Batch;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.World;
@@ -34,6 +38,7 @@ import com.eve.eng1.input.KeyboardController;
 import com.eve.eng1.system.*;
 import com.eve.eng1.tiled.TiledAshleyConfigurator;
 import com.eve.eng1.tiled.TiledService;
+import com.eve.eng1.ui.Hud;
 
 
 public class GameScreen extends ScreenAdapter {
@@ -43,7 +48,8 @@ public class GameScreen extends ScreenAdapter {
     private final Viewport viewport;
     private final OrthographicCamera camera;
     private final AudioService audioService;
-
+    private Hud hud;
+    private SpriteBatch spriteBatch;
 
 
 
@@ -105,6 +111,11 @@ public class GameScreen extends ScreenAdapter {
         this.tiledService.setLoadTileConsumer(tiledAshleyConfigurator::onLoadTile);
         TiledMap tiledMap = this.tiledService.loadMap(MapAsset.BEDROOM);
         this.tiledService.setMap(tiledMap);
+
+        spriteBatch = new SpriteBatch();
+        hud = new Hud(spriteBatch);
+        hud.startTimer();
+
     }
 
     @Override
@@ -115,6 +126,8 @@ public class GameScreen extends ScreenAdapter {
 
     @Override
     public void render(float delta) {
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        hud.update(delta);
         delta = Math.min(delta, 1 / 30f);
         this.engine.update(delta);
 
@@ -122,8 +135,13 @@ public class GameScreen extends ScreenAdapter {
         stage.getBatch().setColor(Color.WHITE);
         stage.act(delta);
         stage.draw();
+        hud.draw();
 
+        if (hud.isTimeUp()){
+            goToMainMenu();
+        }
     }
+
 
     @Override
     public void dispose() {
@@ -132,7 +150,12 @@ public class GameScreen extends ScreenAdapter {
                 disposableSystem.dispose();
             }
         }
-        this.physicWorld.dispose();
-        this.stage.dispose();
+        physicWorld.dispose();
+        stage.dispose();
+    }
+
+    private void goToMainMenu(){
+        game.setScreen(MainMenuScreen.class);
+
     }
 }
