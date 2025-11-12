@@ -3,18 +3,39 @@
 <head>
     <style>
         body {
+            font-family: "Lucida Console", "Courier New", monospace;
+            position: relative;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        
+        body::before {
+            content: "";
             background-image: url('../3NG-Game/website_attatchments/original.png');
             background-position: center;
             background-size: contain;
             background-repeat: no-repeat;
-            font-family: "Lucida Console", "Courier New", monospace;
+            opacity: 0.3; /* ~30% opacity */
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        
+        .content {
+            padding: 15px;
+            position: relative;
+            z-index: 1;
         }
     </style>
     <title>3NG Website</title>
 </head>
 
 <body>
-    <div style="padding: 15px">
+    <div class="content">
         <h1 id="3ng">3NG</h1>
         <p><a href="https://github.com/xqg506/3NG-Game">Github link</a></p>
         <h2 id="deliverables-">Deliverables:</h2>
@@ -69,5 +90,4 @@
         </ul>
     </div>
 </body>
-
 </html>
